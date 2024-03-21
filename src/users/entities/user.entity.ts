@@ -1,3 +1,4 @@
+import { IsNotEmpty } from "class-validator";
 import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -16,12 +17,16 @@ export class User {
   document: number;
 
   @Column()
+  full_name: string;
+
+  @Column()
   role: string;
 
   @Column()
   status: string;
 
   @Column()
+  @IsNotEmpty()
   password: string;
 
   @DeleteDateColumn()
