@@ -3,20 +3,22 @@ import { CreateDocumentTypeDto } from './dto/create-document-type.dto';
 import { UpdateDocumentTypeDto } from './dto/update-document-type.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { DocumentType } from './entities/document-type.entity';
+
 
 @Injectable()
 export class DocumentTypesService {
   constructor(
     @InjectRepository(DocumentType)
-    private documenttypesRepository: Repository<DocumentType>
+    private readonly docTypesRepository: Repository<DocumentType>
   ){}
 
   async create(createDocumentTypeDto: CreateDocumentTypeDto) {
-    return await this.documenttypesRepository.save(createDocumentTypeDto)
+    return await this.docTypesRepository.save(createDocumentTypeDto)
   }
 
   async findAll() {
-    return `This action returns all documentTypes`;
+    return await this.docTypesRepository.find();
   }
 
   async findOne(id: number) {

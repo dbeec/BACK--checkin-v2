@@ -1,8 +1,8 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export class DocumentType {
 
-  @Column()
   @PrimaryGeneratedColumn()
   id: number;
 

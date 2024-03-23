@@ -5,7 +5,6 @@ import { DocumentTypesModule } from './document-types/document-types.module';
 
 @Module({
   imports: [
-    UsersModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -16,6 +15,7 @@ import { DocumentTypesModule } from './document-types/document-types.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    UsersModule,
     DocumentTypesModule,
   ],
   controllers: [],
