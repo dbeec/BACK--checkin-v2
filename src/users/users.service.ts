@@ -17,10 +17,11 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const docTypes = await this.docTypesRepository.findOneBy({type: createUserDto.document})
-
-    if(!docTypes) 
-    // return await this.usersRepository.save(createUserDto);
+    const docTypes = await this.docTypesRepository.findOneBy({id: createUserDto.document_type})
+    const newUser = await this.usersRepository.create()
+    
+    return this.usersRepository.save(NewUser)
+    
   }
 
   async findAll() {
@@ -31,9 +32,9 @@ export class UsersService {
     return await this.usersRepository.findOneBy({ id });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    return await this.usersRepository.update(id, updateUserDto);
-  }
+  // async update(id: number, updateUserDto: UpdateUserDto) {
+  //   return await this.usersRepository.update(id, updateUserDto);
+  // }
 
   async remove(id: number) {
     return await this.usersRepository.softDelete({ id });

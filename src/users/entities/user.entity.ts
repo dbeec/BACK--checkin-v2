@@ -35,8 +35,8 @@ export class User {
   @DeleteDateColumn()
   deleted_at: Date;
 
-  @ManyToOne(() => DocumentType, (documentType) => documentType.id, {
-    eager: true,
+  @ManyToOne(() => DocumentType, (documentType) => documentType.User, {
+    nullable: false,
   })
   document_type: DocumentType;
 }

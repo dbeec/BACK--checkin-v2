@@ -10,5 +10,5 @@ export class DocumentType {
   type: string;
 
   @OneToMany(() => User, (user) => user.document_type)
-  types: User[]
+  User: User[]
 }
