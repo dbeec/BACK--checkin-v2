@@ -1,8 +1,10 @@
 import { IsNotEmpty } from 'class-validator';
+import { DocumentType } from 'src/document-types/entities/document-type.entity';
 import {
   Column,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -13,9 +15,6 @@ export class User {
 
   @Column()
   created_at: Date;
-
-  @Column()
-  document_type: string;
 
   @Column()
   document: number;
@@ -35,4 +34,9 @@ export class User {
 
   @DeleteDateColumn()
   deleted_at: Date;
+
+  @ManyToOne(() => DocumentType, (documentType) => documentType.id, {
+    eager: true,
+  })
+  document_type: DocumentType;
 }

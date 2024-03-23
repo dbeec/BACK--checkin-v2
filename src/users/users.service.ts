@@ -4,16 +4,23 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import { DocumentType } from 'src/document-types/entities/document-type.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+
+    @InjectRepository(DocumentType)
+    private readonly docTypesRepository: Repository<DocumentType>,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    return await this.usersRepository.save(createUserDto);
+    const docTypes = await this.docTypesRepository.findOneBy({type: createUserDto.document})
+
+    if(!docTypes) 
+    // return await this.usersRepository.save(createUserDto);
   }
 
   async findAll() {

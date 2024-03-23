@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class DocumentType {
@@ -7,4 +8,7 @@ export class DocumentType {
 
   @Column()
   type: string;
+
+  @OneToMany(() => User, (user) => user.document_type)
+  types: User[]
 }
