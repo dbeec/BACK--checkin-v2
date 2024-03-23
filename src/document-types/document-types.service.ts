@@ -5,16 +5,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { DocumentType } from './entities/document-type.entity';
 
-
 @Injectable()
 export class DocumentTypesService {
   constructor(
     @InjectRepository(DocumentType)
-    private readonly docTypesRepository: Repository<DocumentType>
-  ){}
+    private readonly docTypesRepository: Repository<DocumentType>,
+  ) {}
 
   async create(createDocumentTypeDto: CreateDocumentTypeDto) {
-    return await this.docTypesRepository.save(createDocumentTypeDto)
+    return await this.docTypesRepository.save(createDocumentTypeDto);
   }
 
   async findAll() {

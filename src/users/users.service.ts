@@ -10,26 +10,25 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-  ){}
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
-    return await this.usersRepository.save(createUserDto)
+    return await this.usersRepository.save(createUserDto);
   }
 
   async findAll() {
-    return await this.usersRepository.find()
+    return await this.usersRepository.find();
   }
 
   async findOne(id: number) {
-    return await this.usersRepository.findOneBy({id})
+    return await this.usersRepository.findOneBy({ id });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    return await this.usersRepository.update(id, updateUserDto)
+    return await this.usersRepository.update(id, updateUserDto);
   }
 
   async remove(id: number) {
-    return await this.usersRepository.softDelete({id})
-
+    return await this.usersRepository.softDelete({ id });
   }
 }

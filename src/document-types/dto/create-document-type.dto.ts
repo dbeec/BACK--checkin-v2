@@ -1,7 +1,6 @@
-import { IsString } from "class-validator";
+import { IsString } from 'class-validator';
 
 export class CreateDocumentTypeDto {
-
   @IsString()
   type: string;
 }
