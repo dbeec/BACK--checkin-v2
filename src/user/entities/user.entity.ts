@@ -1,11 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Role } from "src/roles/entities/role.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   create_at: Date;
 
   @Column()
@@ -14,9 +15,11 @@ export class User {
   @Column()
   full_name: string;
 
-  @Column()
-  rol: string;
+  @ManyToOne(() => Role, (role) => role.id, {
+    eager: true,
+  })
+  role: Role;
 
-  @Column({default: "active"})
+  @Column({ default: "active" })
   status: string;
 }
