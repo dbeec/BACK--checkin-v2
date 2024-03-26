@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DocumentTypesModule } from './document-types/document-types.module';
 
 @Module({
   imports: [
@@ -15,8 +13,6 @@ import { DocumentTypesModule } from './document-types/document-types.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UsersModule,
-    DocumentTypesModule,
   ],
   controllers: [],
   providers: [],
