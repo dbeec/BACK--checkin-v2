@@ -15,7 +15,7 @@ export class User {
   @Column()
   full_name: string;
 
-  @ManyToOne(() => Role, (role) => role.id, {
+  @ManyToOne(() => Role, (roles) => roles.id, {
     eager: true,
   })
   role: Role;

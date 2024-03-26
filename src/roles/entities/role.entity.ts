@@ -9,11 +9,11 @@ export class Role {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   create_at: Date;
 
-  @Column()
+  @Column({unique: true})
   name: string;
 
   @OneToMany(() => User, (user) => user.role)
-  roles: User[]
+  users: User[]
 
   @DeleteDateColumn()
   deleted_at: Date;
