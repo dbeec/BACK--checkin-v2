@@ -21,7 +21,7 @@ export class RolesService {
   }
 
   async findOne(id: number) {
-    return await this.roleRepository.findOneBy({ id })
+    return await this.roleRepository.findOneBy({id: id.toString()})
   }
 
   async update(id: number, updateRoleDto: UpdateRoleDto) {
@@ -29,6 +29,6 @@ export class RolesService {
   }
 
   async remove(id: number) {
-    return await this.roleRepository.softDelete({ id })
+    return await this.roleRepository.softDelete({id: id.toString()})
   }
 }

@@ -33,11 +33,11 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    return await this.userRepository.findOneBy({ id })
+    return await this.userRepository.findOneBy({id: id.toString()})
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.findOneBy({ id });
+    const user = await this.userRepository.findOneBy({id: id.toString()});
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
@@ -50,6 +50,6 @@ export class UserService {
   }
 
   async remove(id: number) {
-    return await this.userRepository.softDelete({ id })
+    return await this.userRepository.softDelete({id: id.toString()})
   }
 }
