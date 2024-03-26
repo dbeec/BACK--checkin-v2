@@ -15,11 +15,17 @@ export class User {
   @Column()
   full_name: string;
 
+  @Column({ unique: true, nullable: false })
+  email: string;
+
+  @Column({ nullable: false })
+  password: string;
+
   @ManyToOne(() => Role, (roles) => roles.id, {
     eager: true,
   })
   role: Role;
 
   @Column({ default: "active" })
-  status: string;
+  status?: string;
 }
