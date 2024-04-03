@@ -1,3 +1,4 @@
+import { DocumentType } from "src/document-types/entities/document-type.entity";
 import { Role } from "src/roles/entities/role.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -9,8 +10,13 @@ export class User {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   create_at: Date;
 
+  @ManyToOne(() => DocumentType, (documentType) => documentType.id, {
+    eager: true,
+  })
+  documentType: DocumentType;
+
   @Column()
-  document_type: string;
+  document: number;
 
   @Column()
   full_name: string;

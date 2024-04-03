@@ -2,7 +2,7 @@ import { User } from "src/user/entities/user.entity";
 import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Role {
+export class DocumentType {
   @PrimaryGeneratedColumn()
   id: string;
 
@@ -10,9 +10,9 @@ export class Role {
   created_at: Date;
 
   @Column({ unique: true, nullable: false })
-  name: string;
+  type: string;
 
-  @OneToMany(() => User, (user) => user.role)
+  @OneToMany(() => User, (user) => user.documentType)
   users: User[]
 
   @DeleteDateColumn()

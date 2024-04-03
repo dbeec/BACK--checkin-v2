@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { Role } from 'src/roles/entities/role.entity';
+import { DocumentType } from 'src/document-types/entities/document-type.entity';
 
 @Injectable()
 export class UserService {
@@ -13,18 +14,26 @@ export class UserService {
     private readonly userRepository: Repository<User>,
 
     @InjectRepository(Role)
-    private readonly roleRepository: Repository<Role>
+    private readonly roleRepository: Repository<Role>,
+
+    @InjectRepository(DocumentType)
+    private readonly docTypesRepository: Repository<DocumentType>
   ) { }
 
   async create(createUserDto: CreateUserDto) {
     const role = await this.roleRepository.findOneBy({ name: createUserDto.role })
+    const documentType = await this.docTypesRepository.findOneBy({ type: createUserDto.type })
 
     if (!role) {
       throw new BadRequestException('Role not found')
     }
+    if (!documentType) {
+      throw new BadRequestException('Document type not found');
+    }
     return await this.userRepository.save({
       ...createUserDto,
       role,
+      documentType
     })
   }
 
