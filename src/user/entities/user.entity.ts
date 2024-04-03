@@ -12,11 +12,12 @@ export class User {
 
   @ManyToOne(() => DocumentType, (documentType) => documentType.id, {
     eager: true,
+    nullable: false,
   })
   documentType: DocumentType;
 
   @Column()
-  document: number;
+  document: string;
 
   @Column()
   full_name: string;
@@ -29,6 +30,7 @@ export class User {
 
   @ManyToOne(() => Role, (roles) => roles.id, {
     eager: true,
+    nullable: false,
   })
   role: Role;
 

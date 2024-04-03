@@ -1,4 +1,4 @@
-import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class CreateUserDto {
 
@@ -6,9 +6,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   type: string;
 
-  @IsInt()
+  @IsString()
   @IsNotEmpty()
-  document: number;
+  document: string;
 
   @IsString()
   @IsNotEmpty()
