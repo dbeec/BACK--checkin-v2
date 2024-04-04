@@ -25,4 +25,6 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   role: string;
+
+  states?: any;
 }

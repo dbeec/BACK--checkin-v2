@@ -1,5 +1,6 @@
 import { DocumentType } from "src/document-types/entities/document-type.entity";
 import { Role } from "src/roles/entities/role.entity";
+import { Status } from "src/status/entities/status.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -34,6 +35,9 @@ export class User {
   })
   role: Role;
 
-  @Column({ default: "active" })
-  status?: string;
+  @ManyToOne(() => Status, (status) => status.id, {
+    eager: true,
+    nullable: false
+  })
+  stateType: Status;
 }

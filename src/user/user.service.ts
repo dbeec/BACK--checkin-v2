@@ -10,6 +10,7 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { Role } from 'src/roles/entities/role.entity';
 import { DocumentType } from 'src/document-types/entities/document-type.entity';
+import { Status } from 'src/status/entities/status.entity';
 
 @Injectable()
 export class UserService {
@@ -22,6 +23,9 @@ export class UserService {
 
     @InjectRepository(DocumentType)
     private readonly docTypesRepository: Repository<DocumentType>,
+
+    @InjectRepository(Status)
+    private readonly stateRepository: Repository<Status>
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -30,6 +34,9 @@ export class UserService {
     });
     const documentType = await this.docTypesRepository.findOneBy({
       type: createUserDto.type,
+    });
+    const stateType = await this.stateRepository.findOneBy({
+      state: createUserDto.states,
     });
 
     if (!role) {
@@ -42,6 +49,7 @@ export class UserService {
       ...createUserDto,
       role,
       documentType,
+      stateType
     });
   }
 

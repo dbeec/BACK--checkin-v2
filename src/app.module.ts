@@ -4,6 +4,7 @@ import { UserModule } from './user/user.module';
 import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { DocumentTypesModule } from './document-types/document-types.module';
+import { StatusModule } from './status/status.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DocumentTypesModule } from './document-types/document-types.module';
     RolesModule,
     AuthModule,
     DocumentTypesModule,
+    StatusModule,
   ],
   controllers: [],
   providers: [],
