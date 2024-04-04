@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import { IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class CreateUserDto {
@@ -18,6 +19,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   email: string;
 
+  @Transform(({value}) => value.trim())
+  @MinLength(6)
   @IsString()
   @IsNotEmpty()
   password: string;

@@ -14,6 +14,6 @@ import { StatusService } from 'src/status/status.service';
   imports: [TypeOrmModule.forFeature([User]), RolesModule, DocumentTypesModule, StatusModule],
   controllers: [UserController],
   providers: [UserService, RolesService, DocumentTypesService, StatusService],
-  exports: []
+  exports: [UserService]
 })
 export class UserModule {}

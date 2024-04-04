@@ -17,7 +17,7 @@ export class User {
   })
   documentType: DocumentType;
 
-  @Column()
+  @Column({ unique: true })
   document: string;
 
   @Column()

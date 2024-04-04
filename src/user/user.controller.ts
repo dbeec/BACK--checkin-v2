@@ -17,11 +17,6 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: number) {
-  //   return this.userService.findOne(id);
-  // }
-
   @Get(':document')
   findOneByDocument(@Param('document') document: string) {
     return this.userService.findOneByDocument(document)
