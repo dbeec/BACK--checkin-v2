@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,15 +21,19 @@ export class UserService {
     private readonly roleRepository: Repository<Role>,
 
     @InjectRepository(DocumentType)
-    private readonly docTypesRepository: Repository<DocumentType>
-  ) { }
+    private readonly docTypesRepository: Repository<DocumentType>,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const role = await this.roleRepository.findOneBy({ name: createUserDto.role })
-    const documentType = await this.docTypesRepository.findOneBy({ type: createUserDto.type })
+    const role = await this.roleRepository.findOneBy({
+      name: createUserDto.role,
+    });
+    const documentType = await this.docTypesRepository.findOneBy({
+      type: createUserDto.type,
+    });
 
     if (!role) {
-      throw new BadRequestException('Role not found')
+      throw new BadRequestException('Role not found');
     }
     if (!documentType) {
       throw new BadRequestException('Document type not found');
@@ -33,28 +41,31 @@ export class UserService {
     return await this.userRepository.save({
       ...createUserDto,
       role,
-      documentType
-    })
+      documentType,
+    });
   }
 
   async findOneByEmail(email: string) {
-    return this.userRepository.findOneBy({ email })
+    return this.userRepository.findOneBy({ email });
   }
 
   async findAll() {
-    return await this.userRepository.find()
+    return await this.userRepository.find();
   }
 
-  async findOne(id: number) {
-    return await this.userRepository.findOneBy({ id: id.toString() })
+  // async findOne(id: number) {
+  //   return await this.userRepository.findOneBy({ id: id.toString() });
+  // }
+
+  async findOneByDocument(document: string) {
+    return await this.userRepository.findOneBy({ document });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.findOneBy({ id: id.toString() });
+  async update(document: string, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOneBy({ document: document });
     if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found`);
+      throw new NotFoundException(`User with ID ${document} not found`);
     }
-
     // Actualizamos las propiedades del usuario con los valores del DTO
     Object.assign(user, updateUserDto);
 
@@ -62,7 +73,7 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async remove(id: number) {
-    return await this.userRepository.softDelete({ id: id.toString() })
+  async remove(document: string) {
+    return await this.userRepository.softDelete({ document: document });
   }
 }
