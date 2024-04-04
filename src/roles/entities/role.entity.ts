@@ -9,7 +9,7 @@ export class Role {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   created_at: Date;
 
-  @Column({ unique: true, nullable: false })
+  @Column({ unique: true, nullable: false, default: 'user'})
   name: string;
 
   @OneToMany(() => User, (user) => user.role)
