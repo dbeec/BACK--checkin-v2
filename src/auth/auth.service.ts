@@ -13,7 +13,6 @@ export class AuthService {
 
   async login({ email, password }: LoginDto) {
     const user = await this.userService.findOneByEmail(email);
-    console.log(user);
 
     if (!user) {
       throw new UnauthorizedException('email y/o contraseña no son validos');
@@ -25,12 +24,16 @@ export class AuthService {
       throw new UnauthorizedException('email y/o contraseña no son validos');
     }
 
-    const payload = { email: user.email };
+    const payload = {  user: user };
     const access_token = await this.jwtService.signAsync(payload);
 
     return {
+      __docType: user.documentType.type,
+      __doc: user.document,
+      __name: user.full_name,
+      __email: user.email,
+      __rol: user.role.name,
       access_token,
-      email,
     };
   }
 }

@@ -48,7 +48,6 @@ export class UserService {
     }
 
     const hashedPassword = await bcryptjs.hash(createUserDto.password, 10);
-    console.log('This is my password ❤️❤️', hashedPassword);
 
     return await this.userRepository.save({
       ...createUserDto,
@@ -66,10 +65,6 @@ export class UserService {
   async findAll() {
     return await this.userRepository.find();
   }
-
-  // async findOne(id: number) {
-  //   return await this.userRepository.findOneBy({ id: id.toString() });
-  // }
 
   async findOneByDocument(document: string) {
     return await this.userRepository.findOneBy({ document });
