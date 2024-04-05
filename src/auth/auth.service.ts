@@ -9,7 +9,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async login({ email, password }: LoginDto) {
     const user = await this.userService.findOneByEmail(email);
@@ -24,15 +24,13 @@ export class AuthService {
       throw new UnauthorizedException('email y/o contraseña no son validos');
     }
 
-    const payload = {  user: user };
+    const payload = { u__id: user.id, u__name: user.full_name, u__mail: user.email };
     const access_token = await this.jwtService.signAsync(payload);
 
     return {
-      __docType: user.documentType.type,
-      __doc: user.document,
+      __uId: user.id,
       __name: user.full_name,
       __email: user.email,
-      __rol: user.role.name,
       access_token,
     };
   }
