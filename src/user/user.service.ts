@@ -11,7 +11,7 @@ import { Repository } from 'typeorm';
 import { Role } from 'src/roles/entities/role.entity';
 import { DocumentType } from 'src/document-types/entities/document-type.entity';
 import { Status } from 'src/status/entities/status.entity';
-import * as bcryptjs from 'bcryptjs'
+import * as bcryptjs from 'bcryptjs';
 
 @Injectable()
 export class UserService {
@@ -26,8 +26,8 @@ export class UserService {
     private readonly docTypesRepository: Repository<DocumentType>,
 
     @InjectRepository(Status)
-    private readonly stateRepository: Repository<Status>
-  ) { }
+    private readonly stateRepository: Repository<Status>,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const role = await this.roleRepository.findOneBy({
@@ -47,8 +47,8 @@ export class UserService {
       throw new BadRequestException('Document type not found');
     }
 
-    const hashedPassword = await bcryptjs.hash(createUserDto.password, 10)
-    console.log("This is my password ❤️❤️",hashedPassword)
+    const hashedPassword = await bcryptjs.hash(createUserDto.password, 10);
+    console.log('This is my password ❤️❤️', hashedPassword);
 
     return await this.userRepository.save({
       ...createUserDto,
