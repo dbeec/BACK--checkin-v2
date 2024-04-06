@@ -58,8 +58,11 @@ export class UserService {
     });
   }
 
-  async findOneByEmail(email: string) {
-    return this.userRepository.findOneBy({ email });
+  async findByEmailWithPassword(email: string) {
+    return this.userRepository.findOne({
+      where: { email },
+      select: ['id', 'email', 'password'],
+    });
   }
 
   async findAll() {
@@ -75,10 +78,8 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with ID ${document} not found`);
     }
-    // Actualizamos las propiedades del usuario con los valores del DTO
     Object.assign(user, updateUserDto);
 
-    // Guardamos los cambios en la base de datos
     return await this.userRepository.save(user);
   }
 
