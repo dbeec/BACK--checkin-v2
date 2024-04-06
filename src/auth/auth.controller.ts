@@ -29,13 +29,6 @@ export class AuthController {
     return this.authSerive.login(loginDto);
   }
 
-  // @Get('profile')
-  // @Roles(Role.ADMIN)
-  // @UseGuards(AuthGuard, RolesGuard)
-  // profile(@Req() req: RequestWithUser) {
-  //   return req.user;
-  // }
-
   @Get('profile')
   @Auth(Role.ADMIN)
   profile(@Req() req: RequestWithUser) {
